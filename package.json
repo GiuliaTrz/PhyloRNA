@@ -1,0 +1,9 @@
+{
+  "name": "RIBOflaskapp",
+  "version": "1.0.0",
+  "dependencies": {
+    "file-saver": "^2.0.5",
+    "jquery": "^3.6.1",
+    "python-shell": "^3.0.1"
+  }
+}

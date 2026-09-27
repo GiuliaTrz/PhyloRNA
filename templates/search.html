@@ -1,0 +1,294 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+
+<section class="search-page">
+
+    <div class="search-header">
+        <h1>Search</h1>
+        <p class="search-subtitle">Search RNA secondary structures by multiple criteria</p>
+    </div>
+
+    <div class="search-card">
+        <form name="search_form" action="/phylorna/search/res/" method="POST" autocomplete="on">
+
+            <div class="search-row">
+                <div class="search-field">
+                    <label for="organism-input">Organism Name</label>
+                    <div class="search-input-wrapper">
+                        <input type="text" id="organism-input" name="Organism name" list="organism-list" size="40" placeholder="Start typing...">
+                        <datalist id="organism-list"></datalist>
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Name of the organism: auto-complete after three characters</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <label for="pseudoknotted">Is Pseudoknotted</label>
+                    <div class="search-input-wrapper">
+                        <select id="pseudoknotted" name="Is Pseudoknotted">
+                            <option value="">---</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Yes if at least one pseudoknot must be present</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-row">
+                <div class="search-field">
+                    <label for="rna-type">RNA Type</label>
+                    <div class="search-input-wrapper">
+                        <select id="rna-type" name="Rna Type">
+                            <option value="">Any</option>
+                            <option value="5S">5S</option>
+                            <option value="16S">16S</option>
+                            <option value="23S">23S</option>
+                            <option value="Group I Introns">Group I Introns</option>
+                            <option value="Group II Introns">Group II Introns</option>
+                            <option value="tRNA">tRNA</option>
+                            <option value="tRNA Seq">tRNA-Seq</option>
+                            <option value="tmRNA">tmRNA</option>
+                            <option value="SRP">SRP</option>
+                        </select>
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">RNA family to search</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <label for="pseudoknot-order">Pseudoknot Order</label>
+                    <div class="search-input-wrapper">
+                        <input type="number" id="pseudoknot-order" name="Pseudoknot order" placeholder="0">
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Order of the pseudoknot, 0 if no pseudoknots are present</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-row">
+                <div class="search-field">
+                    <label for="database">Database</label>
+                    <div class="search-input-wrapper">
+                        <select id="database" name="Database">
+                            <option value="">---</option>
+                            <option value="PDB">PDB</option>
+                            <option value="CRW">CRW</option>
+                            <option value="CRW2">CRW2</option>
+                            <option value="tmRNAdb">tmRNAdb</option>
+                            <option value="SRPdb">SRPdb</option>
+                        </select>
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Database from which the secondary structure is taken or derived</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <label for="genus">Genus</label>
+                    <div class="search-input-wrapper">
+                        <input type="number" id="genus" name="Genus" placeholder="0">
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Genus of the secondary structure, 0 if pseudoknot-free</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-row">
+                <div class="search-field">
+                    <label for="validated">Experimentally Derived</label>
+                    <div class="search-input-wrapper">
+                        <select id="validated" name="Is Validated">
+                            <option value="">---</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Yes if the secondary structure is derived from an experimentally resolved 3D structure</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <label for="shape">Shape</label>
+                    <div class="search-input-wrapper">
+                        <input type="text" id="shape" name="Shape" size="40" placeholder="e.g. ([)]">
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Shape in extended dot-bracket format, e.g. ([)]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-row">
+                <div class="search-field">
+                    <label for="reference-id">Reference Id</label>
+                    <div class="search-input-wrapper">
+                        <input type="text" id="reference-id" name="Benchmark ID" size="20" placeholder="e.g. CRW2_5S_A_1">
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Id of the molecule in PhyloRNA, e.g. CRW2_5S_A_1, CRW_tRNA_trnA_1, PDB_5S_1, PDB_00069</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <label for="core">Core</label>
+                    <div class="search-input-wrapper">
+                        <input type="text" id="core" name="Core" size="40" placeholder="e.g. (()())">
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Core in extended dot-bracket format, e.g. (()())</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-row">
+                <div class="search-field">
+                    <label for="accession">Accession Number</label>
+                    <div class="search-input-wrapper">
+                        <input type="text" id="accession" name="Accession number" size="20" placeholder="e.g. 7ryf, U03732">
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">PDB code or Database Specific code, e.g. 7ryf, U03732</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <label for="core-plus">Core Plus</label>
+                    <div class="search-input-wrapper">
+                        <input type="text" id="core-plus" name="Core plus" size="40" placeholder="e.g. (((()))(()))">
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Core Plus in extended dot-bracket format, e.g. (((()))(()))</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-row">
+                <div class="search-field">
+                    <label>Length</label>
+                    <div class="search-input-wrapper search-range">
+                        <input type="number" name="Length_from" id="leng_f" placeholder="From">
+                        <span class="range-separator">—</span>
+                        <input type="number" name="Length_to" id="leng_t" placeholder="To">
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Range of number of nucleotides in the structure</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <label for="taxonomy">Taxonomy</label>
+                    <div class="search-input-wrapper">
+                        <select id="taxonomy" name="Taxonomy">
+                            <option value="">---</option>
+                            <option value="ENA">ENA</option>
+                            <option value="SILVA">SILVA</option>
+                            <option value="GTDB">GTDB</option>
+                            <option value="LTP">LTP</option>
+                            <option value="NCBI">NCBI</option>
+                        </select>
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Taxonomy to search a given Taxon (below) on a given Taxonomy rank (below)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-row">
+                <div class="search-field">
+                    <label>Number of Base Pairs</label>
+                    <div class="search-input-wrapper search-range">
+                        <input type="number" name="Number_of_weak_bonds_from" id="weak_f" placeholder="From">
+                        <span class="range-separator">—</span>
+                        <input type="number" name="Number_of_weak_bonds_to" id="weak_t" placeholder="To">
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Range of number of base pairs in the structure</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <label for="taxonomy-rank">Taxonomic Rank</label>
+                    <div class="search-input-wrapper">
+                        <select id="taxonomy-rank" name="Taxonomy_rank" onchange="check_taxon_rank(this)">
+                            <option value="">---</option>
+                            <option value="superkingdom">superkingdom</option>
+                            <option value="domain">domain</option>
+                            <option value="phylum">phylum</option>
+                            <option value="class">class</option>
+                            <option value="order">order</option>
+                            <option value="family">family</option>
+                            <option value="genus">genus</option>
+                        </select>
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Taxonomic rank in the selected taxonomy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-row">
+                <div class="search-field">
+                    <label>Number of Unpaired Bases</label>
+                    <div class="search-input-wrapper search-range">
+                        <input type="number" name="num_decoup_from" placeholder="From">
+                        <span class="range-separator">—</span>
+                        <input type="number" name="num_decoup_to" placeholder="To">
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Number of decoupled nucleotides range</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-field">
+                    <label for="taxon">Taxon</label>
+                    <div class="search-input-wrapper">
+                        <input id="Taxon_id" type="text" name="rank_value" disabled>
+                        <div class="tooltip-container">
+                            <img src="{{ url_for('static', filename='img/question-mark.png') }}" alt="Info" class="tooltip-icon" tabindex="0">
+                            <div class="tooltip-content">Taxon to search in the selected taxonomic rank of the selected taxonomy, e.g. Bacteria, Proteobacteria, Gammaproteobacteria, and so on</div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="Taxon_id_hidden" name="rank_value" value="">
+                </div>
+            </div>
+
+            <div class="search-buttons">
+                <button type="submit" class="btn-search">Search</button>
+                <button type="reset" class="btn-reset">Reset</button>
+                <button onclick="location.href='{{ url_for('tutorial.s_tutorial') }}'" type="button" class="btn-tutorial">Tutorial</button>
+            </div>
+
+        </form>
+    </div>
+
+</section>
+
+{% endblock %}

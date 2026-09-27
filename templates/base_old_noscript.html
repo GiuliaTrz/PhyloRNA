@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+        <!-- <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}"> -->
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css"> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+        <!-- (A) LOAD FILE SAVER -->
+        <!-- https://cdnjs.com/libraries/FileSaver.js -->
+        <!-- https://github.com/eligrey/FileSaver.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <title>{% block title %} {% endblock %}</title>
+    </head>
+    <body>
+        <div id="nav">
+            {% include "nav_bar.html" %}
+        </div>
+        <div class="container">
+            {% block content %} {% endblock %}
+        </div>
+        <footer>
+        <br>
+        <p style="text-align:center;padding:20px">This website received funding from the European Union - Next-GenerationEU - National Recovery and Resilience Plan (NRRP) – MISSION 4 COMPONENT 2, INVESTMENT N. 1.1, CALL PRIN 2022 PNRR D.D. 1409 of 14th Sep 2022 - <a href="https://bdslab.unicam.it/rna2fun" target="_blank">RNA2Fun</a> CUP N. J53D23014960001</p>   
+        <table style="width:90%;text-align:center">
+        <tr>
+          <td style="padding:10px"><img id="logo_next" src="{{ url_for('static', filename='img/logo_next.png') }}" height="70"></td>
+          <td style="padding:10px"><img id="logo_mur" src="{{ url_for('static', filename='img/logo_mur.jpg') }}" height="70"></td>
+          <td style="passing:10px"><img id="logo_pnrr" src="{{ url_for('static', filename='img/logo_pnrr.jpg') }}" height="70"></td>
+        </tr>
+        </table>
+        
+        </footer>
+    </body>
+</html>

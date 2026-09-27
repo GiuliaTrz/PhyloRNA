@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+
+<section class="results-page">
+
+    <!-- HEADER -->
+    <div class="results-header">
+        <h1>Search Results</h1>
+        <p class="results-subtitle">RNA secondary structures matching your search criteria</p>
+    </div>
+
+    <!-- BACK BUTTON -->
+    <div class="results-back">
+        <form action="/phylorna/search/">
+            <button type="submit" id="prev_button" class="btn-back">← Back to Search</button>
+        </form>
+    </div>
+
+    <!-- LOADING MESSAGE -->
+    <div id="msg" class="results-loading">Loading, please wait...</div>
+
+    <!-- RESULTS CONTAINER - DUE COLONNE -->
+    <div id="result_container_div" class="results-container" style="display:none">
+
+        <!-- COLONNA SINISTRA: TABELLA RISULTATI (più larga) -->
+        <div class="results-table-col">
+
+            <div class="results-card">
+                <div class="results-card-header">
+                    <h3>Search Results</h3>
+                    <span class="results-count" id="results-count">0 items found</span>
+                </div>
+                <div class="results-card-body">
+                    <div id="table_result_div">
+                        <table class="result_table" id="result_table">
+                            <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Organism Name</th>
+                                    <th>Reference Id</th>
+                                    <th>Accession Number</th>
+                                    <th>RNA Type</th>
+                                    <th>More Information</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results-tbody">
+                                <!-- Results will be populated here by DataTables -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COLONNA DESTRA: DOWNLOAD OPTIONS (più stretta) -->
+        <div class="results-download-col">
+
+            <div class="download-card">
+
+                <div class="download-card-header">
+                    <h3 id="dl_option">Download Options</h3>
+                </div>
+
+                <div class="download-card-body">
+
+                    <!-- RIGA 1: Additional files -->
+                    <div class="download-row">
+                        <div class="download-section">
+                            <p class="download-section-title">Additional files:</p>
+                            <div class="download-checkbox-group">
+                                <label class="checkbox-label">
+                                    <input class="check_button_format" type="checkbox" id="bpseq" value=".bpseq">
+                                    <span>bpseq</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input class="check_button_format" type="checkbox" id="ct" value=".ct">
+                                    <span>ct</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input class="check_button_format" type="checkbox" id="db" value=".db">
+                                    <span>db</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input class="check_button_format" type="checkbox" id="fasta" value=".fasta">
+                                    <span>fasta</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGA 2: Header options -->
+                    <div class="download-row">
+                        <div class="download-section">
+                            <p class="download-section-title">Header:</p>
+                            <div class="download-radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" class="check_header_button" name="header_button" id="header" value="" checked>
+                                    <span>Yes</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" class="check_header_button" name="header_button" id="n_header" value="_nH">
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGA 3: Taxonomy -->
+                    <div class="download-row">
+                        <div class="download-section">
+                            <p class="download-section-title">Taxonomy:</p>
+                            <div class="download-radio-group download-taxonomy-group">
+                                <label class="radio-label">
+                                    <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="SILVA" value="SILVA">
+                                    <span>SILVA</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="ENA" value="ENA" checked>
+                                    <span>ENA</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="LTP" value="LTP">
+                                    <span>LTP</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="NCBI" value="NCBI">
+                                    <span>NCBI</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" class="check_button_taxonomy" name="taxonomy_button" id="GTDB" value="GTDB">
+                                    <span>GTDB</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGA 4: Download Buttons -->
+                    <div class="download-buttons">
+                        <button type="button" id="dl_button" class="btn-download btn-download-primary" onclick="final_download()">
+                            Download Selected
+                        </button>
+                        <button type="button" id="dl_all_button" class="btn-download btn-download-secondary" onclick="download_all()">
+                            Download All
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- HIDDEN REF ARRAY -->
+    <p id="hidden_ref_array" hidden></p>
+
+</section>
+
+<!-- LOADING OVERLAY -->
+<div id="loading_overlay">
+    <div class="spinner"></div>
+    <p>Preparing your download, please wait...</p>
+</div>
+
+<!-- SCRIPTS -->
+<script type="text/javascript">
+    const searchCriteria = {{ search_criteria| tojson }};
+</script>
+<script src="/static/js/searchscript.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#result_container_div').show();
+    $('#msg').hide();
+});
+</script>
+
+{% endblock %}

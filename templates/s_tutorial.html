@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Tutorial{% endblock %}
+
+{% block content %}
+
+<section class="tutorial-page">
+
+    <div class="tutorial-header">
+        <h1>Search Tutorial</h1>
+        <p class="tutorial-subtitle">Step-by-step guide to search RNA secondary structures in PhyloRNA</p>
+    </div>
+
+    <div class="tutorial-card">
+
+        <div class="tutorial-intro">
+            <p>
+                This is an example of a correct research of an organism in the database. If you don't enter any value,
+                the search will show all the RNA sequences in the database.
+            </p>
+            <div class="tutorial-image-wrapper">
+                <img src="{{ url_for('static', filename='img/s_tutorial_imgs/Phormidium_example.png') }}"
+                     alt="Search example"
+                     class="tutorial-image">
+            </div>
+        </div>
+
+        <hr class="tutorial-divider">
+
+        <!-- 1. Organism Name -->
+        <div class="tutorial-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>Search with Organism Name</h3>
+                <p>The name has to be written with only the first character of the name in uppercase.</p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_organism_name.png') }}"
+                         alt="Organism name example"
+                         class="tutorial-image-small">
+                </div>
+            </div>
+        </div>
+
+        <hr class="tutorial-divider">
+
+        <!-- 2. Accession Number -->
+        <div class="tutorial-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>Search with Accession Number</h3>
+                <p>Enter the accession number.</p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_accession_number.png') }}"
+                         alt="Accession number example"
+                         class="tutorial-image-small">
+                </div>
+            </div>
+        </div>
+
+        <hr class="tutorial-divider">
+
+        <!-- 3. Numeric Fields -->
+        <div class="tutorial-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>Search with Unpaired Bases, Genus, Pseudoknot Order</h3>
+                <p>These values are numeric.</p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_unpaired_bases.png') }}"
+                         alt="Unpaired bases example"
+                         class="tutorial-image-small">
+                </div>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_genus.png') }}"
+                         alt="Genus example"
+                         class="tutorial-image-small">
+                </div>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_pseudo_order.png') }}"
+                         alt="Pseudoknot order example"
+                         class="tutorial-image-small">
+                </div>
+            </div>
+        </div>
+
+        <hr class="tutorial-divider">
+
+        <!-- 4. Length and Weak Bonds -->
+        <div class="tutorial-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <h3>Search with Number of Base Pairs or Length</h3>
+                <p>
+                    For both the number of base pairs and the length you have to enter a range from a min value to a max
+                    value.
+                </p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_len_weak.png') }}"
+                         alt="Length and weak bonds range example"
+                         class="tutorial-image-medium">
+                </div>
+
+                <p>You also can enter a single value (for example only the min value or the max value).</p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/search_from_to_with_one_value.png') }}"
+                         alt="Single value example"
+                         class="tutorial-image-medium">
+                </div>
+
+                <p>You can enter the same value for the min and max to search with a specific value.</p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/search_from_to_with_specific_value.png') }}"
+                         alt="Specific value example"
+                         class="tutorial-image-medium">
+                </div>
+            </div>
+        </div>
+
+        <hr class="tutorial-divider">
+
+        <!-- 5. Shape, Core, Core Plus -->
+        <div class="tutorial-step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+                <h3>Search with Shape, Core or Core Plus</h3>
+                <p>Enter a sequence of round and square brackets.</p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_shape.png') }}"
+                         alt="Shape example"
+                         class="tutorial-image-small">
+                </div>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_core.png') }}"
+                         alt="Core example"
+                         class="tutorial-image-small">
+                </div>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_core_plus.png') }}"
+                         alt="Core Plus example"
+                         class="tutorial-image-small">
+                </div>
+            </div>
+        </div>
+
+        <hr class="tutorial-divider">
+
+        <!-- 6. Is Pseudoknotted / Is Validated -->
+        <div class="tutorial-step">
+            <div class="step-number">6</div>
+            <div class="step-content">
+                <h3>Search with Is Pseudoknotted or Is Validated</h3>
+                <p>Select Yes or No from the drop-down menu (default value is null: - - ).</p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_pseudoknotted_options.png') }}"
+                         alt="Pseudoknotted options"
+                         class="tutorial-image-small">
+                </div>
+            </div>
+        </div>
+
+        <hr class="tutorial-divider">
+
+        <!-- 7. RNA Type -->
+        <div class="tutorial-step">
+            <div class="step-number">7</div>
+            <div class="step-content">
+                <h3>Search with RNA Type</h3>
+                <p>
+                    Select an RNA type from the drop-down value. The default value, <strong>Any</strong>, searches all
+                    kinds of RNA types in the database. The value <strong>Others</strong> searches all the RNA types
+                    that are not listed in the drop-down menu.
+                </p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_rna_type_options.png') }}"
+                         alt="RNA type options"
+                         class="tutorial-image-small">
+                </div>
+            </div>
+        </div>
+
+        <hr class="tutorial-divider">
+
+        <!-- 8. Database -->
+        <div class="tutorial-step">
+            <div class="step-number">8</div>
+            <div class="step-content">
+                <h3>Search with Database</h3>
+                <p>Enter the reference database where the search is executed.</p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_db.png') }}"
+                         alt="Database example"
+                         class="tutorial-image-small">
+                </div>
+            </div>
+        </div>
+
+        <hr class="tutorial-divider">
+
+        <!-- 9. Reference ID -->
+        <div class="tutorial-step">
+            <div class="step-number">9</div>
+            <div class="step-content">
+                <h3>Search with Reference ID</h3>
+                <p>Enter the reference id.</p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_ref_id.png') }}"
+                         alt="Reference ID example"
+                         class="tutorial-image-small">
+                </div>
+            </div>
+        </div>
+
+        <hr class="tutorial-divider">
+
+        <!-- 10. Taxonomy -->
+        <div class="tutorial-step">
+            <div class="step-number">10</div>
+            <div class="step-content">
+                <h3>Search with Taxonomy</h3>
+                <p>
+                    Select the taxonomy from the drop-down menu. Selecting a taxonomy, the search result will show only
+                    the organisms that are classified with the selected taxonomy. In the results you can see all the
+                    taxonomies of the organism, as well as the selected one.
+                </p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_taxonomy_options.png') }}"
+                         alt="Taxonomy options"
+                         class="tutorial-image-small">
+                </div>
+            </div>
+        </div>
+
+        <hr class="tutorial-divider">
+
+        <!-- 11. Taxonomy Rank + Taxon -->
+        <div class="tutorial-step">
+            <div class="step-number">11</div>
+            <div class="step-content">
+                <h3>Search with Taxonomy Rank and Taxon</h3>
+                <p>
+                    If you want to search with a specific taxon, you have to first enter the taxonomy rank of the taxon
+                    because the taxon is disabled until the rank is entered.
+                </p>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_taxonomy_rank_options.png') }}"
+                         alt="Taxonomy rank options"
+                         class="tutorial-image-small">
+                </div>
+                <div class="tutorial-image-wrapper">
+                    <img src="{{ url_for('static', filename='img/s_tutorial_imgs/example_taxon.png') }}"
+                         alt="Taxon example"
+                         class="tutorial-image-small">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

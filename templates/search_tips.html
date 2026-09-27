@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+    {% block title %}
+        Search
+    {% endblock %}
+
+    {% block content %}
+
+
+<h1>Search</h1>
+<div id="search_container">
+    <form name="search_form" action="/phylorna/search/res/" method="POST" autocomplete="on">
+        <table id="search_table">
+            <tr>
+                <td><a>Organism name:</a></td>
+                <td>
+                    <input type="text" id="organism-input" name="Organism name" placeholder="Organism name" list="organism-list" size="20">
+                    <datalist id="organism-list"></datalist>
+                    <div class="tooltip-container">
+                        <img src="question-mark.png" alt="Info" class="tooltip-icon" tabindex="0">
+                        <div class="tooltip-content">Enter the full name of the organism. Case insensitive auto-complete after three characters</div>
+                    </div>
+                </td>
+                <td><a>Accession number:</a></td>
+                <td>
+                    <input type="text" name="Accession number" placeholder="Accession number" size="20">
+                    <div class="tooltip-container">
+                        <img src="question-mark.png" alt="Info" class="tooltip-icon" tabindex="0">
+                        <div class="tooltip-content">Provide the accession number, e.g. the PDB code, of the RNA sequence</div>
+                    </div>
+                </td>
+            </tr>
+            <!-- Repeat similar structure for other fields -->
+        </table>
+        <div id="search_buttons_div">
+            <button type="submit" id="search_button">Search</button>
+            <button type="reset" value="reset" id="reset_button">Reset</button>
+            <button onclick="location.href='{{ url_for('s_tutorial') }}'" type="button" id="s_tutorial_btn"> Search Tutorial </button>
+        </div>
+    </form>
+</div>
+    {% endblock %}

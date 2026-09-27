@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<section class="home-page">
+
+    <div class="intro-text">
+        <h2 id="home_h2">PhyloRNA: a database of RNA secondary structures with associated phylogeny</h2>
+
+        <p>
+            PhyloRNA contains known RNA secondary structures associated with their phylogenetic information according to
+            several curated taxonomies (<a href="https://www.arb-silva.de/">SILVA</a>,
+            <a href="https://www.ebi.ac.uk/">ENA</a>, <a href="https://imedea.uib-csic.es/mmg/ltp/#LTP">LTP</a>,
+            <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi">NCBI</a>,
+            <a href="https://gtdb.ecogenomic.org/">GTDB</a>) to allow the scientific community to study the relationship
+            between RNA structures and phylogenetic ranks.
+        </p>
+        <p>
+            In addition, structural features and abstractions of the structures are available.
+        </p>
+    </div>
+
+    <div class="kpi-row">
+        <div class="kpi-item">
+            <span class="kpi-number">{{ num_provenience_total }}</span>
+            <span class="kpi-label">Data Sources</span>
+        </div>
+        <div class="kpi-item">
+            <span class="kpi-number">{{ num_classes_total }}</span>
+            <span class="kpi-label">RNA Classes</span>
+        </div>
+        <div class="kpi-item">
+            <span class="kpi-number">{{ num_total_structures }}</span>
+            <span class="kpi-label">Total Structures</span>
+        </div>
+    </div>
+
+    <div class="image-wrapper">
+        <img src="{{ url_for('static', filename='img/albero.png') }}"
+             alt="Phylogenetic tree"
+             class="home-tree-img">
+        <p class="image-caption">Phylogenetic tree of RNA structures</p>
+    </div>
+
+    <div class="content-grid">
+
+        <div class="info-card">
+            <div class="info-card-header">
+                <h3>Data Sources</h3>
+                <span class="info-card-badge">{{ num_provenience_total }}</span>
+            </div>
+            <div class="info-card-body">
+                <div class="info-item">
+                    <span class="info-number">{{ num_RCSB }}</span>
+                    <span class="info-label"><a href="https://www.rcsb.org/">RCSB Protein Data Bank</a></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-number">{{ num_CRW }}</span>
+                    <span class="info-label"><a href="https://crw-site.chemistry.gatech.edu/">Gutell Lab CRW Site</a></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-number">{{ num_CRW2 }}</span>
+                    <span class="info-label"><a href="https://crw2-comparative-rna-web.org/">CRW2: Comparative RNA Web-2</a></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-number">{{ num_tmRNA }}</span>
+                    <span class="info-label"><a href="https://rth.dk/resources/rnp/tmRDB/">tmRNA Database</a></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-number">{{ num_SRP }}</span>
+                    <span class="info-label"><a href="https://rth.dk/resources/rnp/SRPDB/">SRP Database</a></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-card-header">
+                <h3>RNA Classes</h3>
+                <span class="info-card-badge">{{ num_classes_total }}</span>
+            </div>
+            <div class="info-card-body info-card-body-grid">
+                <div class="info-item info-item-grid">
+                    <span class="info-number">{{ num_5S }}</span>
+                    <span class="info-label">5S rRNA</span>
+                </div>
+                <div class="info-item info-item-grid">
+                    <span class="info-number">{{ num_16S }}</span>
+                    <span class="info-label">16S rRNA</span>
+                </div>
+                <div class="info-item info-item-grid">
+                    <span class="info-number">{{ num_23S }}</span>
+                    <span class="info-label">23S rRNA</span>
+                </div>
+                <div class="info-item info-item-grid">
+                    <span class="info-number">{{ num_GI1 }}</span>
+                    <span class="info-label">Group I Introns</span>
+                </div>
+                <div class="info-item info-item-grid">
+                    <span class="info-number">{{ num_GI2 }}</span>
+                    <span class="info-label">Group II Introns</span>
+                </div>
+                <div class="info-item info-item-grid">
+                    <span class="info-number">{{ num_tRNA }}</span>
+                    <span class="info-label">tRNA</span>
+                </div>
+                <div class="info-item info-item-grid">
+                    <span class="info-number">{{ num_tRNA_seq }}</span>
+                    <span class="info-label">tRNA-Seq</span>
+                </div>
+                <div class="info-item info-item-grid">
+                    <span class="info-number">{{ num_tmRNA }}</span>
+                    <span class="info-label">tmRNA</span>
+                </div>
+                <div class="info-item info-item-grid">
+                    <span class="info-number">{{ num_SRP }}</span>
+                    <span class="info-label">SRP</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    </head>
+    <body>
+        <header>
+            <input type="checkbox" id="mn_bars_checkbox">
+            <label for="mn_bars_checkbox">
+                <i class="fas fa-bars"></i>
+            </label>
+            <label class="logo">
+                <a href="http://www.emanuelamerelli.eu/bigdata/doku.php?id=start">
+                    <img id="logo_lab" src="{{ url_for('static', filename='img/logo_lab_bioShape.png') }}" width="100" height="100">
+                </a>
+                <a href="https://www.unicam.it/">
+                    <img id="logo_uni" src="{{ url_for('static', filename='img/UNICAM_logo.png') }}" width="80" height="95">
+                </a>
+            </label>
+            <label class="text-logo" >
+                <a href="https://www.unicam.it/">
+                    <img id="unicam_text" src="{{ url_for('static', filename='img/UNICAM_scritta.webp') }}" width="126" height="40">
+                </a>
+            </label>
+            <nav class="nav_bar">
+               <a href="{{ url_for('home.home') }}" id="PhyloRNA_title">PhyloRNA</a> <!-- nomeblueprint.nomemetodo-->
+                <ul>
+                    <li><a href="{{ url_for('home.home') }}">Home</a></li> <!-- nomeblueprint.nomemetodo-->
+                    <li><a href="{{ url_for('phylorna.search') }}">Search</a></li>
+                    <li><a href="#">Documentation <i class="fas fa-caret-down"></i></a>
+                        <ul>
+                            <li><a href="{{ url_for('sources.sources') }}">Sources</a></li> <!-- nomeblueprint.nomemetodo-->
+                            <li><a href="#">Tutorial<i style="transform: rotate(-90deg);" class="fas fa-caret-down"></i></a>
+                                <ul>
+                                    <li><a href="{{ url_for('tutorial.s_tutorial') }}">Search</a></li> <!-- nomeblueprint.nomemetodo-->
+                                    <li><a href="{{ url_for('tutorial.d_tutorial') }}">Download</a></li> <!-- nomeblueprint.nomemetodo-->
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ url_for('contact.contatti') }}">Contact us</a></li> <!-- nomeblueprint.nomemetodo-->
+                </ul>
+            </nav>
+        </header>
+    </body>
+</html>

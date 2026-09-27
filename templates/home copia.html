@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h2 id="home_h2">PhyloRNA: a database of RNA secondary structures with associated phylogeny</h2>
+    <h4 id="home_h4">
+        PhyloRNA contains known RNA secondary structures associated with their phylogenetic information according to
+        several curated taxonomies (<a href="https://www.arb-silva.de/">SILVA</a>, <a
+            href="https://www.ebi.ac.uk/">ENA</a>, <a href="https://imedea.uib-csic.es/mmg/ltp/#LTP">LTP</a>, <a
+            href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi">NCBI</a>, <a
+            href="https://gtdb.ecogenomic.org/">GTDB</a>) to allow the scientific community to study the relationship
+        between RNA structures and phylogenetic ranks. In addition, structural features and abstractions of the
+        structures are available.
+    </h4>
+    <div id="home_table_imgs">
+        <style>
+            .tg {
+                border-collapse: collapse;
+                border-spacing: 0;
+            }
+
+            .tg td {
+                border-color: black;
+                border-style: solid;
+                border-width: 1px;
+                font-family: Arial, sans-serif;
+                font-size: 14px;
+                overflow: hidden;
+                padding: 10px 5px;
+                word-break: normal;
+            }
+
+            .tg th {
+                border-color: black;
+                border-style: solid;
+                border-width: 1px;
+                font-family: Arial, sans-serif;
+                font-size: 14px;
+                font-weight: normal;
+                overflow: hidden;
+                padding: 10px 5px;
+                word-break: normal;
+            }
+
+            .tg .tg-0pky {
+                border-color: black;
+                text-align: left;
+                vertical-align: top
+            }
+
+            .tg .tg-0lax {
+                text-align: left;
+                vertical-align: top
+            }
+        </style>
+            <table class="tg">
+                <thead>
+                <tr>
+                    <th class="tg-0pky" colspan="2" style="font-weight: bold">Provenience of PhyloRNA structures</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tg-0lax" style="font-weight: bold">#</td>
+                    <td class="tg-0lax" style="font-weight: bold">Source and Link</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_RCSB }}</td>
+                    <td class="tg-0lax"><a href="https://www.rcsb.org/">RCSB Protein Data Bank</a></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_CRW }}</td>
+                    <td class="tg-0lax"><a href="https://crw-site.chemistry.gatech.edu/">Gutell Lab CRW Site</a></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_CRW2 }}</td>
+                    <td class="tg-0lax"><a href="https://crw2-comparative-rna-web.org/">CRW2: Comparative RNA Web-2</a></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_STRAND }}</td>
+                    <td class="tg-0lax"><a href="http://www.rnasoft.ca/strand/">RNA STRAND Database</a></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax"> {{ num_tmRNA }}</td>
+                    <td class="tg-0lax"><a href="https://rth.dk/resources/rnp/tmRDB/">tmRNA Database</a></td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_RNASE }}</td>
+                    <td class="tg-0lax"><a href="https://academic.oup.com/nar/article/26/1/351/2379438?login=false">RNase P Database</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_SRP }}</td>
+                    <td class="tg-0lax"><a href="https://rth.dk/resources/rnp/SRPDB/"> SRP Database</a></td>
+                </tr>
+                <!--
+                <tr>
+                    <td class="tg-0lax">{{ num_RFAM }}</td>
+                    <td class="tg-0lax"><a href="https://rfam.org/"> Rfam Database</a>
+                    </td>
+                </tr>
+                -->
+                <tr>
+                    <td class="tg-0lax">{{ num_NAD }}</td>
+                    <td class="tg-0lax"><a href="https://www.nakb.org/">Nucleic Acid Database</a></td>
+                </tr>
+                <!--
+                <tr>
+                    <td class="tg-0lax">{{ num_bpRNA }}</td>
+                    <td class="tg-0lax"><a href="https://bprna.cgrb.oregonstate.edu/index.html">bpRNA Database</a></td>
+                </tr>
+                -->
+                </tbody>
+            </table>
+            <img src="{{ url_for('static', filename='img/albero.png') }}" id="albero_png" style="max-width:60%; max-height:60%; border: 1px solid black">
+            <table class="tg">
+                <thead>
+                <tr>
+                    <th class="tg-0pky" colspan="2" style="font-weight: bold">Classes of PhyloRNA structures</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="tg-0lax" style="font-weight: bold">#</td>
+                    <td class="tg-0lax" style="font-weight: bold">Class</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_5S }}</td>
+                    <td class="tg-0lax">5S rRNA</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_16S }}</td>
+                    <td class="tg-0lax">16S rRNA</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_23S }}</td>
+                    <td class="tg-0lax">23S rRNA</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_GI1 }}</td>
+                    <td class="tg-0lax">Group I Introns</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_GI2 }}</td>
+                    <td class="tg-0lax">Group II Introns</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_tRNA }}</td>
+                    <td class="tg-0lax">tRNA</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_Hairpin_Ribozyme }}</td>
+                    <td class="tg-0lax">Hairpin Ribozyme</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_Hammerhead_ribozyme }}</td>
+                    <td class="tg-0lax">Hammerhead Ribozyme</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_Other_Ribozyme }}</td>
+                    <td class="tg-0lax">Other Ribozyme</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_IRES }}</td>
+                    <td class="tg-0lax">IRES</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_RNase_P_RNA }}</td>
+                    <td class="tg-0lax">RNase P RNA</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_snRNA }}</td>
+                    <td class="tg-0lax">snRNA</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_SRP_RNA }}</td>
+                    <td class="tg-0lax">SRP RNA</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_Synthetic_RNA }}</td>
+                    <td class="tg-0lax">Synthetic RNA</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_Viral_Phage }}</td>
+                    <td class="tg-0lax">Viral &amp; Phage</td>
+                </tr>
+                <tr>
+                    <td class="tg-0lax">{{ num_Other }}</td>
+                    <td class="tg-0lax">Other RNAs</td>
+                </tr>
+                </tbody>
+            </table>
+    </div>
+{% endblock %}
